@@ -45,7 +45,8 @@ class AnchorWatcher(object):
         e.g. ['a', 'a.alt', 'a.norm', 'a.fina', 'a.whatever'].
         '''
         baseGlyphName = glyphName.split('.')[0]
-        return [g.name for g in self.font if g.name.split('.')[0] == baseGlyphName and not g.name == glyphName]
+        friends = [g.name for g in self.font if g.name.split('.')[0] == baseGlyphName and not g.name == glyphName]
+        return friends
 
 
     def anchorChangedCallback(self, sender):
@@ -64,7 +65,7 @@ class GlyphWatcher(object):
 
     def glyphObserver(self, info):
         activeGlyph = info['glyph']
-        if activeGlyph:
+        if activeGlyph != None:
             self.observedGlyphs.setdefault(activeGlyph.name, [])
         
         for gName in self.observedGlyphs.keys():
