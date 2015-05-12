@@ -1,4 +1,4 @@
-## anchorBaby.py
+## `anchorBaby.py`
 
 RoboFont script for keeping anchors consistent.
 
