@@ -68,17 +68,18 @@ class GlyphWatcher(object):
         if activeGlyph != None:
             self.observedGlyphs.setdefault(activeGlyph.name, [])
         
-        for gName in self.observedGlyphs.keys():
-            if gName == activeGlyph.name:
-                'Collect Anchor observer objects for the active glyph.'
-                for anchor in activeGlyph.anchors:
-                    aw = AnchorWatcher(anchor)
-                    self.observedGlyphs[gName].append(aw)
-            else:
-                'Unsubscribe from Anchor observer objects in inactive glyphs.'
-                for observer in self.observedGlyphs[gName]:
-                    observer.unsubscribe()
-                del self.observedGlyphs[gName]
+        if len(self.observedGlyphs):
+            for gName in self.observedGlyphs.keys():
+                if gName == activeGlyph.name:
+                    'Collect Anchor observer objects for the active glyph.'
+                    for anchor in activeGlyph.anchors:
+                        aw = AnchorWatcher(anchor)
+                        self.observedGlyphs[gName].append(aw)
+                else:
+                    'Unsubscribe from Anchor observer objects in inactive glyphs.'
+                    for observer in self.observedGlyphs[gName]:
+                        observer.unsubscribe()
+                    del self.observedGlyphs[gName]
                 
 
 GlyphWatcher()
